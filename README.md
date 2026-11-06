@@ -1,69 +1,80 @@
-# ⚡ RailSwitch
+# RailSwitch (EdgePulse) ⚡
 
-[![Kotlin](https://img.shields.io/badge/Kotlin-2.0.21-7F52FF?style=flat&logo=kotlin&logoColor=white)](https://kotlinlang.org)
-[![Android](https://img.shields.io/badge/Android-API%2024%2B-3DDC84?style=flat&logo=android&logoColor=white)](https://developer.android.com)
-[![Compose](https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4?style=flat&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Android](https://img.shields.io/badge/Platform-Android-3DDC84?style=flat-square&logo=android&logoColor=white)](https://developer.android.com)
+[![Kotlin](https://img.shields.io/badge/Language-Kotlin-7F52FF?style=flat-square&logo=kotlin&logoColor=white)](https://kotlinlang.org)
+[![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
+[![Material 3](https://img.shields.io/badge/Design-Material%203-757575?style=flat-square&logo=materialdesign&logoColor=white)](https://m3.material.io)
+[![License](https://img.shields.io/badge/License-MIT-blue.style=flat-square)](LICENSE)
 
-**RailSwitch** is a fast-paced, high-octane reflex arcade game built for Android using **100% Jetpack Compose**, custom 2D Canvas rendering, and procedural audio synthesis.
+**RailSwitch (EdgePulse)** is a minimalist, fast-paced reflex arcade game built natively for Android using **Jetpack Compose**, **Material 3**, and modern Compose `Canvas` graphics.
 
-Players switch between two parallel electromagnetic tracks to dodge incoming energy blocks moving downward at escalating speeds. With smooth transition curves, dynamic streak multipliers, screen shake effects, and tactile haptic feedback, RailSwitch delivers a pure, thrilling mobile arcade experience.
+Navigate a glowing pulse along a square perimeter rail, anticipate procedural lethal hazards, reverse direction at split-second timing, and complete consecutive lap streaks to set high scores!
+
+---
+
+## 🎮 Gameplay Overview
+
+In **RailSwitch**, your pulse constantly moves along a square perimeter rail. You cannot leave the edge. Danger approaches from all sides, and timing is everything.
+
+* **Instant Direction Reversal:** Tap anywhere on the screen or swipe to instantly flip movement direction and avoid approaching hazards.
+* **Procedural Hazard Generation:** Dynamic hazards spawn continuously with fair, difficulty-scaled telegraph windows before becoming lethal.
+* **Lap Counter & Multiplier Streaks:** Completing a 360° lap awards **+100 bonus points** plus an escalating **consecutive lap streak multiplier**.
+* **Dynamic Speed Progression:** As survival time increases, player speed grows gradually up to difficulty caps, testing your reflexes to the limit.
 
 ---
 
 ## ✨ Features
 
-- 🎮 **Dynamic Dual-Rail Gameplay**: Tap anywhere or swipe to instantly transition between left and right tracks.
-- 🎨 **Hardware-Accelerated 2D Canvas**: Custom-rendered `RailCanvas` with glowing neon tracks, player trail animations, pulse indicators, and dynamic screen shake.
-- 🔊 **Procedural PCM Audio Synthesis**: Ultra-low latency sound effects synthesized mathematically in Kotlin code without external audio assets.
-- 📳 **Tactile Haptic Engine**: Custom vibration feedback patterns for rail switching, successful dodges, combo milestones, and game-over impacts.
-- ⚙️ **3 Balanced Difficulty Tiers**:
-  - **Easy**: Relaxed pace, wider spacing, gentle acceleration.
-  - **Medium**: Standard tempo, progressive speed increments, dynamic spawner logic.
-  - **Hard**: Razor-thin reaction windows, high velocity, maximum challenge.
-- 🔥 **Streak Multipliers & Combo Milestones**: Build consecutive dodges to stack score bonuses and trigger milestone sounds.
-- 🛡️ **Guaranteed Solvability**: Procedural `BlockSpawner` enforces mathematical safety gaps ensuring zero unavoidable block placements.
-- 🎨 **Multiple Neon Themes**: Choose between **Dark**, **Electric Cyber**, and **OLED Black** visual themes with Material 3 integration.
-- 📊 **Persistent Statistics**: Reactive `StateFlow` storage tracks your high scores, longest streaks, total games played, and total blocks avoided.
-- 🛡️ **100% Offline & Private**: Zero ads, zero telemetry, zero permissions required beyond `VIBRATE`.
+- ⚡ **Native Jetpack Compose Canvas**: Smooth 60 FPS 2D rendering powered by Compose graphics and custom vector geometries.
+- 🔊 **Procedural PCM Audio Synthesizer**: Low-latency 16-bit PCM sound synthesis using Android `AudioTrack`—zero audio asset files required!
+- 📳 **Haptic Feedback**: Tactile vibration feedback on direction switches, lap completions, and collisions.
+- 🎯 **Multiple Difficulty Modes**:
+  - **Easy**: Slower speed growth, longer telegraph windows (1.5s), max 2 concurrent hazards.
+  - **Medium**: Balanced arcade action, 1.15s telegraph window, max 3 concurrent hazards.
+  - **Hard**: Fast pace, short reaction window (0.85s), max 4 concurrent hazards.
+- 🎨 **Adaptive Themes**: Seamless Dark, Light, and System theme modes with vibrant arcade neon palettes.
+- 📊 **High Score & Stat Tracking**: Tracks best score, longest survival time, total laps completed, games played, and per-difficulty high scores.
+- 🔒 **100% Offline & Private**: Zero telemetry, zero analytics, no network permissions requested.
 
 ---
 
-## 🛠 Tech Stack & Architecture
+## 💥 Hazard Types
 
-- **Language**: Kotlin
-- **UI Framework**: Jetpack Compose with Material 3 components
-- **Graphics**: Compose `Canvas` & `DrawScope` hardware-accelerated 2D graphics
-- **Architecture**: MVVM with decoupled `GameEngine` core for pure unit testability
-- **State Management**: Kotlin Coroutines & `StateFlow`
-- **Audio**: Custom `AudioTrack` PCM signal generator (`SoundManager`)
-- **Persistence**: `SharedPreferences` wrapped in reactive `PreferencesManager`
-- **Navigation**: Jetpack Compose Navigation (`RailSwitchNavHost`)
+| Hazard Type | Description |
+| :--- | :--- |
+| **Perimeter Block** | A moving block patrolling the outer perimeter. Requires switching direction before impact. |
+| **Perimeter Surge** | A stationary edge segment that blinks during telegraph and pulses with lethal energy. |
+| **Cross-Beam** | Geometric laser beams connecting opposing perimeter points, making contact points lethal zones. |
 
-```
-com.example.railswitch
-├── audio/          # Procedural PCM sound & Haptics engines
-├── data/           # SharedPreferences & StateFlow persistence
-├── logic/          # Core GameEngine physics loop & BlockSpawner algorithms
-├── model/          # Data models (GameState, Block, Rail, Difficulty, Settings)
+---
+
+## 🛠️ Tech Stack & Architecture
+
+- **Language:** 100% [Kotlin](https://kotlinlang.org/)
+- **UI & Layout:** [Jetpack Compose](https://developer.android.com/jetpack/compose) with [Material 3](https://m3.material.io/)
+- **State Management:** Android `ViewModel` + Kotlin `StateFlow` (Unidirectional Data Flow)
+- **Math Engine:** Normalized 1D perimeter geometry `[0.0, 1.0)` mapped to 2D screen coordinates
+- **Audio:** Real-time PCM sine sweep, chord, and noise synthesis via `AudioTrack`
+- **Data Storage:** `SharedPreferences` (`GamePreferences`)
+- **Testing:** `JUnit 4` unit tests covering perimeter normalization, collision detection, lap mechanics, and hazard fair-spawning
+
+---
+
+## 📁 Project Structure
+
+```text
+com.example.edgepulse/
+├── audio/            # SoundManager (Procedural AudioTrack synthesizer) & HapticManager
+├── data/             # GamePreferences (SharedPreferences persistence & stats flow)
+├── engine/           # GameEngine (Core game loop, progression, collision detection)
+├── model/            # GameState, Player, Hazard types, PerimeterGeometry, Difficulty
 ├── ui/
-│   ├── components/ # Custom arcade UI buttons, panels, and badges
-│   ├── navigation/ # Compose Navigation host & screen routes
-│   ├── screens/    # Home, Game, Result, Settings, About screens
-│   └── theme/      # Color palettes, typography, and Material 3 theme setups
-└── MainActivity.kt # Main Activity entry point with edge-to-edge layout
+│   ├── components/   # ArcadeButton, GameArena, StatCard, DifficultySelector, etc.
+│   ├── navigation/   # EdgePulseNavHost & screen routes
+│   ├── screens/      # HomeScreen, GameScreen, ResultScreen, SettingsScreen, AboutScreen, SplashScreen
+│   └── theme/        # Color, Type, Theme (Material 3 Dark/Light/System)
+└── viewmodel/        # GameViewModel & SettingsViewModel
 ```
-
----
-
-## 🎮 How to Play
-
-1. **Start Game**: Select your difficulty from the main menu and hit **PLAY**.
-2. **Switch Rails**:
-   - **Tap Anywhere**: Instantly toggles between the left and right rails.
-   - **Swipe Gesture**: Swipe left or right for directional rail switching.
-3. **Build Streaks**: Each successfully avoided block increases your streak count and point multiplier.
-4. **Avoid Collisions**: Touching any block results in an instant game over with screen shake and haptic feedback!
 
 ---
 
@@ -71,12 +82,11 @@ com.example.railswitch
 
 ### Prerequisites
 
-- **Android Studio**: Ladybug (2024.2.1) or newer recommended
-- **JDK**: Java 11 / 17
-- **Android SDK**: API 37 (Build Tools & SDK Platform)
-- **Min Android SDK**: API 24 (Android 7.0 Nougat)
+* **Android Studio** Ladybug (2024.2.1) or newer
+* **JDK 11** or higher
+* **Android SDK**: Compile SDK 37 / Min SDK 24 (Android 7.0+)
 
-### Building from Source
+### Building & Running
 
 1. Clone the repository:
    ```bash
@@ -84,40 +94,20 @@ com.example.railswitch
    cd RailSwitch
    ```
 
-2. Open the project in Android Studio.
+2. Open the project in **Android Studio**.
 
-3. Build and run on an emulator or physical device:
+3. Build the debug APK via CLI:
    ```bash
    ./gradlew assembleDebug
    ```
 
-4. Run automated unit tests:
+4. Run unit tests:
    ```bash
    ./gradlew test
    ```
 
 ---
 
-## 🧪 Unit Tests
-
-RailSwitch includes a comprehensive test suite in `RailSwitchGameTest.kt` verifying:
-- Rail transition physics & input locks during transitions
-- Block spawner algorithm & pattern safety gap calculations
-- Vertical collision detection accuracy
-- Score multiplier math and streak milestone calculations
-- Difficulty progression scaling
-
----
-
 ## 📄 License
 
-```
-MIT License
-
-Copyright (c) 2025 Abdullah Ateeq
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restrictionlimitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software.
-```
+This project is licensed under the [MIT License](LICENSE).

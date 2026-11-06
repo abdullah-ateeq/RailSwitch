@@ -22,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "RailSwitch"
+rootProject.name = "EdgePulse"
 include(":app")
  
